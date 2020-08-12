@@ -12,40 +12,54 @@ rad，全名 `Radium`，名字来源于放射性元素——镭, 从一个URL开
 
 1. 基本使用
 
-    ```rad -t http://example.com```
+    ```
+    rad -t http://example.com
+    ```
 
 2. 需要手动登录的情况
     
-    ```rad -t http://example.com -wait-login```
+    ```
+    rad -t http://example.com -wait-login
+    ```
 
 执行以上命令会自动禁用无头浏览模式，开启一个浏览器供手动登录。
 在登录完毕后在命令行界面点击回车键继续爬取。
 
 3. 将爬取基本结果导出为文件
 
-    ```rad -t http://example.com -text-output result.txt```
+    ```
+    rad -t http://example.com -text-output result.txt
+    ```
 
 以上命令会将爬取到的URL输出到result.txt中
-格式为```Method URL``` 例：```GET http://example.com```
+格式为 `Method URL` 例：`GET http://example.com`
 
 4. 导出完整请求
 
-    ```rad -t http://example.com -full-text-output result.txt```
+    ```
+    rad -t http://example.com -full-text-output result.txt
+    ```
 
 5. 与xray联动
 
-* 社区版：设置上级代理为xray监听地址
-运行xray：
+    * 社区版：设置上级代理为xray监听地址
+        运行xray：
 
-    ```xray webscan --listen 127.0.0.1:7777 --html-output proxy.html```
+        ```
+        xray webscan --listen 127.0.0.1:7777 --html-output proxy.html
+        ```
 
-运行rad：
+        运行rad：
 
-    ```rad -t http://example.com -http-proxy 127.0.0.1:7777```
+        ```
+        rad -t http://example.com -http-proxy 127.0.0.1:7777
+        ```
 
-* 高级版对 rad 进行了深度融合，下载后可以一键使用：
+    * 高级版对 rad 进行了深度融合，下载后可以一键使用：
 
-    ```xray webscan --browser-crawler http://example.com --html-output vuln.html```
+        ```
+        xray webscan --browser-crawler http://example.com --html-output vuln.html
+        ```
 
 # 参数配置
 
