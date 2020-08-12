@@ -4,7 +4,12 @@ rad，全名 `Radium`，名字来源于放射性元素——镭, 从一个URL开
 
 > 一款专为安全扫描而生的浏览器爬虫
 
-# 快速使用
+## 下载地址
+
+https://github.com/chaitin/rad/releases
+
+
+## 快速使用
 
 在使用之前，请务必阅读并同意 [Disclaimer](./Disclaimer.md)文件中的条款，否则请勿安装使用本工具。
 
@@ -61,7 +66,7 @@ rad，全名 `Radium`，名字来源于放射性元素——镭, 从一个URL开
         xray webscan --browser-crawler http://example.com --html-output vuln.html
         ```
 
-# 参数配置
+## 参数配置
 
 rad首次运行后会自动在当前目录生成rad_config.yml配置文件
 
@@ -91,4 +96,15 @@ restrictions-on-requests:                    # 对请求行为的一些限制项
   max-click-or-event-trigger: 1000           # 单个页面中最大点击或事件触发次数(不大于10000)
   click-or-event-interval: 1000              # 点击间隔，单位毫秒
 ```
+
+## 讨论
+
+如有问题可以在 GitHub 提 issue, 也可在下方的讨论组里
+
+1. GitHub issue: https://github.com/chaitin/xray/issues
+1. QQ 群: 717365081
+1. 微信群: 扫描以下二维码加我的个人微信，会把大家拉到 `xray` 官方微信群    
+
+<img src="https://docs.xray.cool/assets/wechat.jpg?nocache=_" height="200px">
+
 
