@@ -14,7 +14,7 @@ RUN yum install -y unzip && \
 
 ADD rad_config.yml /app/rad_config.yml
 
-ENV http-proxy 127.0.0.1:7777
-ENV target http://testphp.vulnweb.com/
+ENV HTTPPROXY 127.0.0.1:7777
+ENV TARGET http://testphp.vulnweb.com/
 
-CMD ["sh","-c","/app/rad -http-proxy $http-proxy -t $target"]
+CMD ["sh","-c","/app/rad -http-proxy $HTTPPROXY -t $TARGET"]
