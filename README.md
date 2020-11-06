@@ -44,8 +44,15 @@ https://github.com/chaitin/rad/releases
     ```
     rad -t http://example.com -full-text-output result.txt
     ```
+    
 
-5. 与xray联动
+5. 导出完整请求为JSON
+
+    ```
+    rad -t http://example.com -json result.json
+    ```    
+
+6. 与xray联动
 
     * 社区版：设置上级代理为xray监听地址
         运行xray：
@@ -72,6 +79,8 @@ rad首次运行后会自动在当前目录生成rad_config.yml配置文件
 
 ```yaml
 enable-image-display: false                  # 启用图片显示，适用于需要验证码登录的情况，启用wait-login自动开启
+load-wait: 2                                 # 页面加载完毕后的等待时间，单位秒，网速不佳时可尝试调大该值
+exec-path: ""                                # 启动chrome的路径，为空会自动在默认路径寻找
 disable-headless: false                      # 禁用无头模式
 request-config:                              # 请求头配置
   user-agent: ""                             # 请求user-agent配置
@@ -95,6 +104,7 @@ restrictions-on-requests:                    # 对请求行为的一些限制项
   max-count-of-page: 1000                    # 最多爬取的页面数量限制
   max-click-or-event-trigger: 1000           # 单个页面中最大点击或事件触发次数(不大于10000)
   click-or-event-interval: 1000              # 点击间隔，单位毫秒
+
 ```
 
 ## 讨论
