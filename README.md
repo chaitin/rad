@@ -115,6 +115,6 @@ restrictions-on-requests:                    # 对请求行为的一些限制项
 1. QQ 群: 717365081
 1. 微信群: 扫描以下二维码加我的个人微信，会把大家拉到 `xray` 官方微信群    
 
-<img src="https://docs.xray.cool/assets/wechat.jpg?nocache=_" height="200px">
+<img src="https://docs.xray.cool/assets/wechat.jpg?nocache=2" height="200px">
 
 
