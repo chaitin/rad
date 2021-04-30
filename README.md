@@ -78,33 +78,68 @@ https://github.com/chaitin/rad/releases
 rad首次运行后会自动在当前目录生成rad_config.yml配置文件
 
 ```yaml
-enable-image-display: false                  # 启用图片显示，适用于需要验证码登录的情况，启用wait-login自动开启
-load-wait: 2                                 # 页面加载完毕后的等待时间，单位秒，网速不佳时可尝试调大该值
-exec-path: ""                                # 启动chrome的路径，为空会自动在默认路径寻找
-disable-headless: false                      # 禁用无头模式
-request-config:                              # 请求头配置
-  user-agent: ""                             # 请求user-agent配置
-  headers:                                   # 请求header配置
-  - key: ""                                  # header的key
-    value: ""                                # header的value
-  cookies:                                   # 请求cookie配置
-  - name: ""                                 # cookie的name
-    value: ""                                # cookie的value
-restrictions-on-urls:                        # 对爬取的URL的一些限制项
-  disallowed-suffix: []                      # 不允许的文件后缀
-  disallowed-keywords-in-path-and-query: []  # 不允许的URL关键字
-  disallowed-domain: []                      # 不允许的域名
-  disallowed-urls: []                        # 不允许的URL（正则）
-  allowed-domains: []                        # 允许的域名，起始目标会被自动加入其中
-  allowed-urls: []                           # 允许的URL（正则）
-restrictions-on-requests:                    # 对请求行为的一些限制项
-  max-concurrent: 10                         # 最大页面并发（不大于10）
-  max-depth: 5                               # 最大页面深度限制
-  max-click-depth: 5                         # 一个页面中最大点击深度限制
-  max-count-of-page: 1000                    # 最多爬取的页面数量限制
-  max-click-or-event-trigger: 1000           # 单个页面中最大点击或事件触发次数(不大于10000)
-  click-or-event-interval: 1000              # 点击间隔，单位毫秒
-
+exec_path: ""                     # 启动chrome的路径
+disable_headless: false           # 禁用无头模式
+force_sandbox: false              # 强制开启sandbox；为 false 时默认开启沙箱，但在容器中会关闭沙箱。为true时强制启用沙箱，可能导致在docker中无法使用。
+enable_image: false               # 启用图片显示
+parent_path_detect: true          # 是否启用父目录探测功能
+proxy: ""                         # 代理配置
+user_agent: ""                    # 请求user-agent配置
+domain_headers:                   # 请求头配置:[]{domain,map[headerKey]HeaderValue}
+  - domain: '*'                   # 为哪些域名设置header，glob语法
+    headers: {                    # 请求头，map[key]value
+      Cookie: somecookie
+    }                    
+max_depth: 10                     # 最大页面深度限制
+navigate_timeout_second: 10       # 访问超时时间，单位秒
+load_timeout_second: 10           # 加载超时时间，单位秒
+retry: 0                          # 页面访问失败后的重试次数
+page_analyze_timeout_second: 300  # 页面分析超时时间，单位秒
+max_interactive: 1000             # 单个页面最大交互次数
+max_interactive_depth: 10         # 页面交互深度限制
+max_page_concurrent: 10           # 最大页面并发（不大于10）
+max_page_visit: 1000              # 总共允许访问的页面数量
+max_page_visit_per_site: 1000     # 每个站点最多访问的页面数量
+element_filter_strength: 0        # 过滤同站点相似元素强度，1-7取值，强度逐步增大，为0时不进行跨页面元素过滤
+new_task_filter_config: # 检查某个链接是否应该被加入爬取队列
+  hostname_allowed: [ ]            # 允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
+  hostname_disallowed: [ ]         # 不允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
+  port_allowed: [ ]                # 允许访问的端口, 支持的格式如: 80、80-85
+  port_disallowed: [ ]             # 不允许访问的端口, 支持的格式如: 80、80-85
+  path_allowed: [ ]                # 允许访问的路径，支持的格式如: test、*test*
+  path_disallowed: [ ]             # 不允许访问的路径, 支持的格式如: test、*test*
+  query_key_allowed: [ ]           # 允许访问的 Query Key，支持的格式如: test、*test*
+  query_key_disallowed: [ ]        # 不允许访问的 Query Key, 支持的格式如: test、*test*
+  fragment_allowed: [ ]            # 允许访问的 Fragment, 支持的格式如: test、*test*
+  fragment_disallowed: [ ]         # 不允许访问的 Fragment, 支持的格式如: test、*test*
+  post_key_allowed: [ ]            # 允许访问的 Post Body 中的参数, 支持的格式如: test、*test*
+  post_key_disallowed: [ ]         # 不允许访问的 Post Body 中的参数, 支持的格式如: test、*test*
+request_send_filter_config: # 检查某个请求是否应该被发送
+  hostname_allowed: [ ]            # 允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
+  hostname_disallowed: [ ]         # 不允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
+  port_allowed: [ ]                # 允许访问的端口, 支持的格式如: 80、80-85
+  port_disallowed: [ ]             # 不允许访问的端口, 支持的格式如: 80、80-85
+  path_allowed: [ ]                # 允许访问的路径，支持的格式如: test、*test*
+  path_disallowed: [ ]             # 不允许访问的路径, 支持的格式如: test、*test*
+  query_key_allowed: [ ]           # 允许访问的 Query Key，支持的格式如: test、*test*
+  query_key_disallowed: [ ]        # 不允许访问的 Query Key, 支持的格式如: test、*test*
+  fragment_allowed: [ ]            # 允许访问的 Fragment, 支持的格式如: test、*test*
+  fragment_disallowed: [ ]         # 不允许访问的 Fragment, 支持的格式如: test、*test*
+  post_key_allowed: [ ]            # 允许访问的 Post Body 中的参数, 支持的格式如: test、*test*
+  post_key_disallowed: [ ]         # 不允许访问的 Post Body 中的参数, 支持的格式如: test、*test*
+request_output_filter_config: # 检查某个请求是否应该被输出
+  hostname_allowed: [ ]            # 允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
+  hostname_disallowed: [ ]         # 不允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
+  port_allowed: [ ]                # 允许访问的端口, 支持的格式如: 80、80-85
+  port_disallowed: [ ]             # 不允许访问的端口, 支持的格式如: 80、80-85
+  path_allowed: [ ]                # 允许访问的路径，支持的格式如: test、*test*
+  path_disallowed: [ ]             # 不允许访问的路径, 支持的格式如: test、*test*
+  query_key_allowed: [ ]           # 允许访问的 Query Key，支持的格式如: test、*test*
+  query_key_disallowed: [ ]        # 不允许访问的 Query Key, 支持的格式如: test、*test*
+  fragment_allowed: [ ]            # 允许访问的 Fragment, 支持的格式如: test、*test*
+  fragment_disallowed: [ ]         # 不允许访问的 Fragment, 支持的格式如: test、*test*
+  post_key_allowed: [ ]            # 允许访问的 Post Body 中的参数, 支持的格式如: test、*test*
+  post_key_disallowed: [ ]         # 不允许访问的 Post Body 中的参数, 支持的格式如: test、*test*
 ```
 
 ## 讨论
